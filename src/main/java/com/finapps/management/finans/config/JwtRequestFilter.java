@@ -15,14 +15,14 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.finapps.management.finans.services.JwtUserDetailsService;
+import com.finapps.management.finans.services.UserService;
 
 import io.jsonwebtoken.ExpiredJwtException;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 	@Autowired
-	private JwtUserDetailsService jwtUserDetailsService;
+	private UserService jwtUserDetailsService;
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 

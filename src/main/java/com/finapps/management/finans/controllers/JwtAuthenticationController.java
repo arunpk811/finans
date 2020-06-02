@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.finapps.management.finans.config.JwtTokenUtil;
 import com.finapps.management.finans.models.JwtRequest;
 import com.finapps.management.finans.models.JwtResponse;
-import com.finapps.management.finans.services.JwtUserDetailsService;
+import com.finapps.management.finans.services.UserService;
 
 
 @RestController
@@ -26,7 +26,7 @@ public class JwtAuthenticationController {
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 	@Autowired
-	private JwtUserDetailsService userDetailsService;
+	private UserService userDetailsService;
 
 	@PostMapping("/authenticate")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {

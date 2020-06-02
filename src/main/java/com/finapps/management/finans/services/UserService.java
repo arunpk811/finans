@@ -11,13 +11,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.finapps.management.finans.models.UserDetail;
+import com.finapps.management.finans.models.Users;
 import com.finapps.management.finans.repositories.UserRepository;
 import com.finapps.management.finans.utils.Constants;
 
 
 @Service
-public class JwtUserDetailsService implements UserDetailsService {
+public class UserService implements UserDetailsService {
 
 	@Autowired
 	UserRepository userRepo;
@@ -26,7 +26,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 		try {
-			UserDetail user = userRepo.findByUsername(username);
+			Users user = userRepo.findByUsername(username);
 			if(username.equals("superadmin")) return new User(username,"$2a$10$d1mgtJ7yA8mFgp6FRTlfEug6jhlh4Ab8vYIaMJH6wFNaOM761xge2",new ArrayList<>());
 			if(user !=null && user.getIsActive() ==1) 
 				return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
@@ -38,15 +38,15 @@ public class JwtUserDetailsService implements UserDetailsService {
 		}
 	}
 
-	public List<UserDetail> getUsers() {
+	public List<Users> getUsers() {
 		return userRepo.findAll();
 	}
 
-	public UserDetail getUserByUsername(String username) {
+	public Users getUserByUsername(String username) {
 		return userRepo.findByUsername(username);
 	}
 
-	public UserDetail create(UserDetail userDetail) {
+	public Users create(Users userDetail) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedPassword = encoder.encode(userDetail.getPassword());
 		userDetail.setPassword(encodedPassword);

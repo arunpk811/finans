@@ -10,28 +10,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.finapps.management.finans.models.UserDetail;
-import com.finapps.management.finans.services.JwtUserDetailsService;
+import com.finapps.management.finans.models.Users;
+import com.finapps.management.finans.services.UserService;
 
 
 @RestController
 public class UserController {
 	
 	@Autowired
-	JwtUserDetailsService jwtUserService;
+	UserService jwtUserService;
 	
 	@GetMapping("/users")
-	public List<UserDetail> getUsers(){
+	public List<Users> getUsers(){
 		return jwtUserService.getUsers();
 	}
 	
 	@GetMapping("/users/{username}")
-	public UserDetail getUsers(@PathVariable String username){
+	public Users getUsers(@PathVariable String username){
 		return jwtUserService.getUserByUsername(username);
 	}
 	
 	@PostMapping("/users")
-	public UserDetail create(@RequestBody UserDetail userDetail) {
+	public Users create(@RequestBody Users userDetail) {
 		return jwtUserService.create(userDetail);
 	}
 	

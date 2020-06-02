@@ -2,10 +2,10 @@ package com.finapps.management.finans.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.finapps.management.finans.models.UserDetail;
+import com.finapps.management.finans.models.Users;
 
 
-public interface UserRepository extends JpaRepository<UserDetail, Long> {
+public interface UserRepository extends JpaRepository<Users, Long> {
 
-	public UserDetail findByUsername(String username);
+	public Users findByUsername(String username);
 }
