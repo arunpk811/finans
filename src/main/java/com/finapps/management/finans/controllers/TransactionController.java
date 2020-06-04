@@ -3,6 +3,8 @@ package com.finapps.management.finans.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,27 +18,28 @@ import com.finapps.management.finans.services.TransactionService;
 
 
 @RestController
+@CrossOrigin
 public class TransactionController {
 	@Autowired
 	TransactionService transactionService;
 
-	@GetMapping("/transactions")
-	public List<Transaction> getAllTransactions() {
+	@GetMapping("/api/transactions")
+	public List<Transaction> getAllTransactions(Authentication auth) {
 		return transactionService.getTransactions();
 	}
 
-	@PostMapping("/transactions")
-	public Transaction create(@RequestBody Transaction transaction) {
+	@PostMapping("/api/transactions")
+	public Transaction create(@RequestBody Transaction transaction, Authentication auth) {
 		return transactionService.create(transaction);
 	}
 
-	@PutMapping("/transactions")
-	public Transaction update(@RequestBody Transaction transaction) {
+	@PutMapping("/api/transactions")
+	public Transaction update(@RequestBody Transaction transaction, Authentication auth) {
 		return transactionService.update(transaction);
 	}
 
-	@DeleteMapping("/transactions/{id}")
-	public String delete(@PathVariable Long id) {
+	@DeleteMapping("/api/transactions/{id}")
+	public String delete(@PathVariable Long id, Authentication auth) {
 		return transactionService.delete(id);
 	}
 }

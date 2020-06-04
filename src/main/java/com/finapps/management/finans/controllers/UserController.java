@@ -3,6 +3,7 @@ package com.finapps.management.finans.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,27 +16,28 @@ import com.finapps.management.finans.services.UserService;
 
 
 @RestController
+@CrossOrigin
 public class UserController {
 	
 	@Autowired
 	UserService jwtUserService;
 	
-	@GetMapping("/users")
+	@GetMapping("/api/users")
 	public List<Users> getUsers(){
 		return jwtUserService.getUsers();
 	}
 	
-	@GetMapping("/users/{username}")
+	@GetMapping("/api/users/{username}")
 	public Users getUsers(@PathVariable String username){
 		return jwtUserService.getUserByUsername(username);
 	}
 	
-	@PostMapping("/users")
+	@PostMapping("/api/users")
 	public Users create(@RequestBody Users userDetail) {
 		return jwtUserService.create(userDetail);
 	}
 	
-	@DeleteMapping("/users/{id}")
+	@DeleteMapping("/api/users/{id}")
 	public String delete(@PathVariable Long id) {
 		return jwtUserService.delete(id);
 	}

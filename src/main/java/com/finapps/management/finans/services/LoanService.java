@@ -18,8 +18,8 @@ public class LoanService {
     @Autowired
     UserRepository userRepo;
 
-    public List<Loan> getLoans(Long userId) {
-        Users user = userRepo.findById(userId).get();
+    public List<Loan> getLoans(String username) {
+        Users user = userRepo.findByUsername(username);
         return loanRepo.findAllByUser(user);
     }
 

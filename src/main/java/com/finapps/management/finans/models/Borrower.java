@@ -1,11 +1,11 @@
 package com.finapps.management.finans.models;
 
-import javax.persistence.Column;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -18,18 +18,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Users {
-	@Id
-	@GeneratedValue
-	private Long id;
-	@NotNull
-	@Column(unique = true)
-	private String username;
-	@NotNull
-	private String password;
-	@NotNull
-	private int isActive;
-	@ManyToOne
-	@Getter(AccessLevel.NONE)
-	private Role role;
+public class Borrower {
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String name;
+    private String description;
+    private Double amount;
+    private Date date;
+    @ManyToOne
+    @Getter(AccessLevel.NONE)
+    private Users user;
 }
