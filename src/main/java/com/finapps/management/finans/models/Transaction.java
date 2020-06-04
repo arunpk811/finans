@@ -8,7 +8,9 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,4 +34,7 @@ public class Transaction {
 	private Float amount;
 	private String type;
 	private Date transactionDate;
+	@Getter(AccessLevel.NONE)
+	@ManyToOne
+	private Users user;
 }

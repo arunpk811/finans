@@ -1,5 +1,7 @@
 package com.finapps.management.finans.models;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,6 +25,7 @@ public class Loan {
     private String name;
     private String description;
     private Double amount;
+    private Date date;
     @ManyToOne
     @Getter(AccessLevel.NONE)
     private Users user;

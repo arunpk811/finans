@@ -23,11 +23,15 @@ public class LoanService {
         return loanRepo.findAllByUser(user);
     }
 
-    public Loan create(Loan loan) {
+    public Loan create(Loan loan, String username) {
+        Users user = userRepo.findByUsername(username);
+        loan.setUser(user);
         return loanRepo.save(loan);
     }
 
-    public Loan update(Loan loan) {
+    public Loan update(Loan loan, String username) {
+        Users user = userRepo.findByUsername(username);
+        loan.setUser(user);
         return loanRepo.save(loan);
     }
 

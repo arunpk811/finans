@@ -25,17 +25,17 @@ public class TransactionController {
 
 	@GetMapping("/api/transactions")
 	public List<Transaction> getAllTransactions(Authentication auth) {
-		return transactionService.getTransactions();
+		return transactionService.getTransactions(auth.getName());
 	}
 
 	@PostMapping("/api/transactions")
 	public Transaction create(@RequestBody Transaction transaction, Authentication auth) {
-		return transactionService.create(transaction);
+		return transactionService.create(transaction, auth.getName());
 	}
 
 	@PutMapping("/api/transactions")
 	public Transaction update(@RequestBody Transaction transaction, Authentication auth) {
-		return transactionService.update(transaction);
+		return transactionService.update(transaction, auth.getName());
 	}
 
 	@DeleteMapping("/api/transactions/{id}")

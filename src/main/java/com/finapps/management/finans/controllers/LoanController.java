@@ -29,11 +29,11 @@ public class LoanController {
 
     @PostMapping("/api/loans")
     public Loan addLoan(@RequestBody Loan loan, Authentication auth){
-        return loanService.create(loan);
+        return loanService.create(loan, auth.getName());
     }
     @PutMapping("/api/loans")
     public Loan updateLoan(@RequestBody Loan loan, Authentication auth){
-        return loanService.update(loan);
+        return loanService.update(loan, auth.getName());
     }
     @DeleteMapping("/api/loans/{loanId}")
     public String deleteLoan(@PathVariable Long loanId, Authentication auth){

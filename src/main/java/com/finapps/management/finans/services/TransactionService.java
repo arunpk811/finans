@@ -3,10 +3,13 @@ package com.finapps.management.finans.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.finapps.management.finans.models.Transaction;
+import com.finapps.management.finans.models.Users;
 import com.finapps.management.finans.repositories.TransactionRepository;
+import com.finapps.management.finans.repositories.UserRepository;
 import com.finapps.management.finans.utils.Constants;
 
 
@@ -14,16 +17,23 @@ import com.finapps.management.finans.utils.Constants;
 public class TransactionService {
 	@Autowired
 	TransactionRepository transactionRepo;
+	@Autowired
+    UserRepository userRepo;
 	
-	public List<Transaction> getTransactions(){
-		return transactionRepo.findAll();
+	public List<Transaction> getTransactions(String username){
+		Users user = userRepo.findByUsername(username);
+        return transactionRepo.findAllByUser(user);
 	}
 	
-	public Transaction create(Transaction transaction){
+	public Transaction create(Transaction transaction, String username){
+		Users user = userRepo.findByUsername(username);
+        transaction.setUser(user);
 		return transactionRepo.save(transaction);
 	}
 	
-	public Transaction update(Transaction transaction){
+	public Transaction update(Transaction transaction, String username){
+		Users user = userRepo.findByUsername(username);
+        transaction.setUser(user);
 		return transactionRepo.save(transaction);
 	}
 	

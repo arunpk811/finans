@@ -6,7 +6,6 @@ import com.finapps.management.finans.models.Borrower;
 import com.finapps.management.finans.services.BorrowerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
