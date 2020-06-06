@@ -3,9 +3,12 @@ package com.finapps.management.finans.controllers;
 import java.util.List;
 
 import com.finapps.management.finans.models.Borrower;
+import com.finapps.management.finans.models.response.StringResponse;
 import com.finapps.management.finans.services.BorrowerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,7 +39,7 @@ public class BorrowerController {
         return borrowerService.update(borrower, auth.getName());
     }
     @DeleteMapping("/api/borrowers/{borrowerId}")
-    public String deleteBorrower(@PathVariable Long borrowerId, Authentication auth) throws Exception{
-        return borrowerService.delete(borrowerId);
+    public ResponseEntity<StringResponse> deleteBorrower(@PathVariable Long borrowerId, Authentication auth) throws Exception{
+        return new ResponseEntity<>(new StringResponse(borrowerService.delete(borrowerId)), HttpStatus.OK) ;
     }
 }

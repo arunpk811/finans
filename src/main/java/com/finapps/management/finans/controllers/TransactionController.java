@@ -3,6 +3,8 @@ package com.finapps.management.finans.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.finapps.management.finans.models.Transaction;
+import com.finapps.management.finans.models.response.StringResponse;
 import com.finapps.management.finans.services.TransactionService;
 
 
@@ -39,7 +42,7 @@ public class TransactionController {
 	}
 
 	@DeleteMapping("/api/transactions/{id}")
-	public String delete(@PathVariable Long id, Authentication auth) {
-		return transactionService.delete(id);
+	public ResponseEntity<StringResponse> delete(@PathVariable Long id, Authentication auth) {
+		return new ResponseEntity<>(new StringResponse(transactionService.delete(id)), HttpStatus.OK);
 	}
 }

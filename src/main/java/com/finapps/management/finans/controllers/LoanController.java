@@ -3,9 +3,12 @@ package com.finapps.management.finans.controllers;
 import java.util.List;
 
 import com.finapps.management.finans.models.Loan;
+import com.finapps.management.finans.models.response.StringResponse;
 import com.finapps.management.finans.services.LoanService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,21 +26,21 @@ public class LoanController {
     LoanService loanService;
 
     @GetMapping("/api/loans")
-    public List<Loan> getLoans(Authentication auth){
-        return loanService.getLoans(auth.getName());
+    public ResponseEntity<List<Loan>> getLoans(Authentication auth){
+        return new ResponseEntity<>(loanService.getLoans(auth.getName()), HttpStatus.OK);
     }
 
     @PostMapping("/api/loans")
-    public Loan addLoan(@RequestBody Loan loan, Authentication auth){
-        return loanService.create(loan, auth.getName());
+    public ResponseEntity<Loan> addLoan(@RequestBody Loan loan, Authentication auth){
+        return new ResponseEntity<>(loanService.create(loan, auth.getName()), HttpStatus.OK);
     }
     @PutMapping("/api/loans")
-    public Loan updateLoan(@RequestBody Loan loan, Authentication auth){
-        return loanService.update(loan, auth.getName());
+    public ResponseEntity<Loan> updateLoan(@RequestBody Loan loan, Authentication auth){
+        return new ResponseEntity<>(loanService.update(loan, auth.getName()), HttpStatus.OK);
     }
     @DeleteMapping("/api/loans/{loanId}")
-    public String deleteLoan(@PathVariable Long loanId, Authentication auth){
-        return loanService.delete(loanId);
+    public ResponseEntity<StringResponse> deleteLoan(@PathVariable Long loanId, Authentication auth){
+        return new ResponseEntity<>(new StringResponse(loanService.delete(loanId)), HttpStatus.OK) ;
     }
 
 }
