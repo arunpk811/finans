@@ -1,6 +1,9 @@
 package com.finapps.management.finans.services;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 
 import com.finapps.management.finans.models.Loan;
 import com.finapps.management.finans.models.Users;
@@ -29,7 +32,7 @@ public class LoanService {
         return loanRepo.save(loan);
     }
 
-    public Loan update(Loan loan, String username) {
+    public Loan update(Long id, Loan loan, String username) {
         Users user = userRepo.findByUsername(username);
         loan.setUser(user);
         return loanRepo.save(loan);
@@ -42,5 +45,10 @@ public class LoanService {
         } catch (Exception e) {
             return Constants.CRUD_ERROR;
         }
+    }
+
+    public Double getTotalDebt(String username){
+        Users user = userRepo.findByUsername(username);
+        return loanRepo.findAllByUser(user).stream().mapToDouble(loan -> loan.getAmount()).sum();
     }
 }

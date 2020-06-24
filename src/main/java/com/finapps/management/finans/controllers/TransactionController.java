@@ -9,16 +9,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.finapps.management.finans.models.Transaction;
 import com.finapps.management.finans.models.response.StringResponse;
 import com.finapps.management.finans.services.TransactionService;
-
 
 @RestController
 @CrossOrigin
@@ -36,9 +35,9 @@ public class TransactionController {
 		return transactionService.create(transaction, auth.getName());
 	}
 
-	@PutMapping("/api/transactions")
-	public Transaction update(@RequestBody Transaction transaction, Authentication auth) {
-		return transactionService.update(transaction, auth.getName());
+	@PatchMapping("/api/transactions/{id}")
+	public Transaction update(@PathVariable Long id, @RequestBody Transaction transaction, Authentication auth) {
+		return transactionService.update(id, transaction, auth.getName());
 	}
 
 	@DeleteMapping("/api/transactions/{id}")

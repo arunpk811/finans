@@ -24,7 +24,7 @@ public class AccountService {
 		return accountRepo.save(account);
 	}
 	
-	public Account update(Account account) {
+	public Account update(Long id, Account account) {
 		return accountRepo.save(account);
 	}
 	

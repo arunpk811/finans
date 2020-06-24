@@ -30,7 +30,7 @@ public class TransactionService {
 		return transactionRepo.save(transaction);
 	}
 	
-	public Transaction update(Transaction transaction, String username){
+	public Transaction update(Long id, Transaction transaction, String username){
 		Users user = userRepo.findByUsername(username);
         transaction.setUser(user);
 		return transactionRepo.save(transaction);

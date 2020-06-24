@@ -9,4 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LoanRepository extends JpaRepository<Loan, Long> {
     public List<Loan> findAllByUser(Users user);
+
+    // @Query("select sum(l.amount) from Loan l join Users u on u.id= l.id where u.id = :userId")
+    // public Double getTotalDept(String userId);
 }

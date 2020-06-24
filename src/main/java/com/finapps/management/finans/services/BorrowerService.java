@@ -29,7 +29,7 @@ public class BorrowerService {
         return borrowerRepo.save(borrower);
     }
 
-    public Borrower update(Borrower borrower, String username) {
+    public Borrower update(Long id, Borrower borrower, String username) {
         Users user = userRepo.findByUsername(username);
         borrower.setUser(user);
         return borrowerRepo.save(borrower);
@@ -42,5 +42,10 @@ public class BorrowerService {
         } catch (Exception e) {
             return Constants.CRUD_ERROR;
         }
+    }
+
+    public Double getTotalAmount(String username) {
+        Users user = userRepo.findByUsername(username);
+        return borrowerRepo.findAllByUser(user).stream().mapToDouble(t->t.getAmount()).sum();
     }
 }
