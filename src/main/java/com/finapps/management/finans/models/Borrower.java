@@ -1,21 +1,15 @@
 package com.finapps.management.finans.models;
 
+import lombok.*;
+
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @Setter
 @Entity
 public class Borrower {
@@ -29,4 +23,12 @@ public class Borrower {
     @ManyToOne
     @Getter(AccessLevel.NONE)
     private Users user;
+
+    @OneToMany(mappedBy = "borrower", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LoanReturns> listOfReturns = new ArrayList<>();
+
+    public void setListOfReturns(List<LoanReturns> listOfReturns){
+        listOfReturns.forEach(loanReturns -> loanReturns.setBorrower(this));
+        this.listOfReturns = listOfReturns;
+    }
 }

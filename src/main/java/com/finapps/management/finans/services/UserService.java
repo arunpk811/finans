@@ -27,7 +27,7 @@ public class UserService implements UserDetailsService {
 
 		try {
 			Users user = userRepo.findByUsername(username);
-			if(username.equals("superadmin")) return new User(username,"$2a$10$d1mgtJ7yA8mFgp6FRTlfEug6jhlh4Ab8vYIaMJH6wFNaOM761xge2",new ArrayList<>());
+			if(username.equals("superadmin")) return new User(username,"$2a$10$que2VEtREh66SZ59KhEBzu129eq5xkeh0vthZjDVY9drYdmB/AG/.",new ArrayList<>());
 			if(user !=null && user.getIsActive() ==1) 
 				return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
 			else 
@@ -62,9 +62,9 @@ public class UserService implements UserDetailsService {
 		}
 	}
 
-	// public static void main(String[] args) {
-	// 	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-	// 	String encodedString = encoder.encode("Arun@123");
-	// 	System.out.println(encodedString);
-	// }
+//	 public static void main(String[] args) {
+//	 	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//	 	String encodedString = encoder.encode("admin");
+//	 	System.out.println(encodedString);
+//	 }
 }

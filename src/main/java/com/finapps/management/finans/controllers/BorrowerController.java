@@ -3,6 +3,7 @@ package com.finapps.management.finans.controllers;
 import java.util.List;
 
 import com.finapps.management.finans.models.Borrower;
+import com.finapps.management.finans.models.LoanReturns;
 import com.finapps.management.finans.models.response.StringResponse;
 import com.finapps.management.finans.services.BorrowerService;
 
@@ -51,5 +52,20 @@ public class BorrowerController {
     @GetMapping("/api/borrowers/total")
     public Double getTotalAmount(Authentication auth) throws Exception {
         return borrowerService.getTotalAmount(auth.getName());
+    }
+
+    @GetMapping("/api/borrowers/{borrowerId}/loanreturns")
+    public List<LoanReturns> getLoanReturnByBorrower(@PathVariable Long borrowerId, Authentication auth){
+        return borrowerService.getReturnDetails(borrowerId, auth.getName());
+    }
+
+    @PostMapping("/api/borrowers/{borrowerId}/loanreturns")
+    public LoanReturns getLoanReturnByBorrower(@PathVariable Long borrowerId, @RequestBody LoanReturns loanReturns, Authentication auth){
+        return borrowerService.addAReturn(borrowerId, loanReturns, auth.getName());
+    }
+
+    @DeleteMapping("/api/borrowers/{borrowerId}/loanreturns/{loanReturnId}")
+    public ResponseEntity<StringResponse> removeAreturn(@PathVariable Long loanReturnId, Authentication auth){
+        return new ResponseEntity<>(new StringResponse(borrowerService.removeAreturn(loanReturnId)), HttpStatus.OK);
     }
 }
