@@ -26,22 +26,25 @@ public class TransactionController {
 	TransactionService transactionService;
 
 	@GetMapping("/api/transactions")
-	public List<Transaction> getAllTransactions(Authentication auth) {
-		return transactionService.getTransactions(auth.getName());
+	public ResponseEntity<List<Transaction>> getAllTransactions(Authentication auth) {
+		return new ResponseEntity<>(transactionService.getTransactions(auth.getName()), HttpStatus.OK);
 	}
 
 	@PostMapping("/api/transactions")
-	public Transaction create(@RequestBody Transaction transaction, Authentication auth) {
-		return transactionService.create(transaction, auth.getName());
+	public ResponseEntity<Transaction> create(@RequestBody Transaction transaction, Authentication auth) {
+		return new ResponseEntity<>(transactionService.create(transaction, auth.getName()), HttpStatus.OK);
 	}
 
 	@PatchMapping("/api/transactions/{id}")
-	public Transaction update(@PathVariable Long id, @RequestBody Transaction transaction, Authentication auth) {
-		return transactionService.update(id, transaction, auth.getName());
+	public ResponseEntity<Transaction> update(@PathVariable Long id, @RequestBody Transaction transaction, Authentication auth) {
+		return new ResponseEntity<>(transactionService.update(id, transaction, auth.getName()), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/api/transactions/{id}")
 	public ResponseEntity<StringResponse> delete(@PathVariable Long id, Authentication auth) {
 		return new ResponseEntity<>(new StringResponse(transactionService.delete(id)), HttpStatus.OK);
 	}
+
+//	@GetMapping("/api/transactions/{bank}")
+//	public ResponseEntity
 }

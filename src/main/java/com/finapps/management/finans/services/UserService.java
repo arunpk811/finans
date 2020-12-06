@@ -20,14 +20,14 @@ import com.finapps.management.finans.utils.Constants;
 public class UserService implements UserDetailsService {
 
 	@Autowired
-	UserRepository userRepo;
+	private UserRepository userRepo;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 		try {
 			Users user = userRepo.findByUsername(username);
-			if(username.equals("superadmin")) return new User(username,"$2a$10$que2VEtREh66SZ59KhEBzu129eq5xkeh0vthZjDVY9drYdmB/AG/.",new ArrayList<>());
+			if(username.equals("superadmin")) return new User(username,"$2a$10$t0hJxpIfcVnTUk5Bd48G6uzpOw6IPYumNSFBsR4MliP9EU4KlJjha",new ArrayList<>());
 			if(user !=null && user.getIsActive() ==1) 
 				return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
 			else 
@@ -64,7 +64,7 @@ public class UserService implements UserDetailsService {
 
 //	 public static void main(String[] args) {
 //	 	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//	 	String encodedString = encoder.encode("admin");
+//	 	String encodedString = encoder.encode("d033e22ae348aeb5660fc2140aec35850c4da997");
 //	 	System.out.println(encodedString);
 //	 }
 }

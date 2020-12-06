@@ -3,24 +3,28 @@ package com.finapps.management.finans.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
+@Builder
 public class Account {
 	@Id
 	@GeneratedValue
 	private Long id;
 	private Long accountNumber;
-	private String bankName;
-	private Long balance;
-	private String type;
-	private Integer isActive;
+	private Banks bank;
+	private Double balance;
+	private AccountType type;
+	private Boolean isActive;
+
+	@ManyToOne
+	@Getter(AccessLevel.NONE)
+	private Users user;
+
 }

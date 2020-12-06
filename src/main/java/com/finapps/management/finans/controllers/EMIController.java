@@ -3,6 +3,8 @@ package com.finapps.management.finans.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,23 +23,23 @@ public class EMIController {
 	EMIUtil emiUtil;
 
 	@GetMapping("/api/calculate/{principle}/{roi}/{tenure}")
-	public List<LoanDetails> calculateEmi(@PathVariable double principle, @PathVariable double roi,
-			@PathVariable int tenure, Authentication auth) {
+	public ResponseEntity<List<LoanDetails>> calculateEmi(@PathVariable double principle, @PathVariable double roi,
+														 @PathVariable int tenure, Authentication auth) {
 		LoanDetails loanDetails = new LoanDetails(principle, roi, tenure);
-		return emiUtil.getEmiDetails(loanDetails);
+		return new ResponseEntity<>(emiUtil.getEmiDetails(loanDetails), HttpStatus.OK);
 	}
 
 	@GetMapping("/api/totalintpayable/{principle}/{roi}/{tenure}")
-	public String totalIntPayable(@PathVariable double principle, @PathVariable double roi, @PathVariable int tenure,
+	public ResponseEntity<String> totalIntPayable(@PathVariable double principle, @PathVariable double roi, @PathVariable int tenure,
 			Authentication auth) {
 		LoanDetails loanDetails = new LoanDetails(principle, roi, tenure);
-		return emiUtil.getTotalInterestPayable(loanDetails) + "";
+		return new ResponseEntity<>(emiUtil.getTotalInterestPayable(loanDetails) + "", HttpStatus.OK);
 	}
 
 	@GetMapping("/api/totalamtpayable/{principle}/{roi}/{tenure}")
-	public String totalAmtPayable(@PathVariable double principle, @PathVariable double roi, @PathVariable int tenure,
+	public ResponseEntity<String> totalAmtPayable(@PathVariable double principle, @PathVariable double roi, @PathVariable int tenure,
 			Authentication auth) {
 		LoanDetails loanDetails = new LoanDetails(principle, roi, tenure);
-		return emiUtil.getTotalAmtPayable(loanDetails) + "";
+		return new ResponseEntity<>(emiUtil.getTotalAmtPayable(loanDetails) + "", HttpStatus.OK);
 	}
 }

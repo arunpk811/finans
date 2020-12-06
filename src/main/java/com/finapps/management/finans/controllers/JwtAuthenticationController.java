@@ -1,5 +1,7 @@
 package com.finapps.management.finans.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +23,7 @@ import com.finapps.management.finans.services.UserService;
 @RestController
 @CrossOrigin
 public class JwtAuthenticationController {
+	Logger logger = LoggerFactory.getLogger(JwtAuthenticationController.class);
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	@Autowired
@@ -33,6 +36,7 @@ public class JwtAuthenticationController {
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 		final String token = jwtTokenUtil.generateToken(userDetails);
+		logger.debug(token);
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 

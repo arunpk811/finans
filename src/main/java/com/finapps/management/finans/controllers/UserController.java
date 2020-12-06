@@ -26,18 +26,18 @@ public class UserController {
 	UserService jwtUserService;
 	
 	@GetMapping("/api/users")
-	public List<Users> getUsers(){
-		return jwtUserService.getUsers();
+	public ResponseEntity<List<Users>> getUsers(){
+		return new ResponseEntity<>(jwtUserService.getUsers(),HttpStatus.OK);
 	}
 	
 	@GetMapping("/api/users/{username}")
-	public Users getUsers(@PathVariable String username){
-		return jwtUserService.getUserByUsername(username);
+	public ResponseEntity<Users> getUsers(@PathVariable String username){
+		return new ResponseEntity<>(jwtUserService.getUserByUsername(username), HttpStatus.OK);
 	}
 	
 	@PostMapping("/api/users")
-	public Users create(@RequestBody Users userDetail) {
-		return jwtUserService.create(userDetail);
+	public ResponseEntity<Users> create(@RequestBody Users userDetail) {
+		return new ResponseEntity<>(jwtUserService.create(userDetail), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/api/users/{id}")

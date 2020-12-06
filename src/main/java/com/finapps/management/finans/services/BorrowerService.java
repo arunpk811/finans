@@ -16,11 +16,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class BorrowerService {
     @Autowired
-    BorrowerRepository borrowerRepo;
+    private BorrowerRepository borrowerRepo;
     @Autowired
-    UserRepository userRepo;
+    private UserRepository userRepo;
     @Autowired
-    LoanReturnsRepository loanReturnsRepo;
+    private LoanReturnsRepository loanReturnsRepo;
 
     public List<Borrower> getBorrowers(String username) {
         Users user = userRepo.findByUsername(username);

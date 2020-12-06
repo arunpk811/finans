@@ -28,19 +28,19 @@ public class BorrowerController {
     BorrowerService borrowerService;
 
     @GetMapping("/api/borrowers")
-    public List<Borrower> getBorrowers(Authentication auth) throws Exception {
-        return borrowerService.getBorrowers(auth.getName());
+    public ResponseEntity<List<Borrower>> getBorrowers(Authentication auth) throws Exception {
+        return new ResponseEntity<>(borrowerService.getBorrowers(auth.getName()), HttpStatus.OK);
     }
 
     @PostMapping("/api/borrowers")
-    public Borrower addBorrower(@RequestBody Borrower borrower, Authentication auth) throws Exception {
-        return borrowerService.create(borrower, auth.getName());
+    public ResponseEntity<Borrower> addBorrower(@RequestBody Borrower borrower, Authentication auth) throws Exception {
+        return new ResponseEntity<>(borrowerService.create(borrower, auth.getName()), HttpStatus.OK);
     }
 
     @PatchMapping("/api/borrowers/{borrowerId}")
-    public Borrower updateBorrower(@PathVariable Long borrowerId, @RequestBody Borrower borrower, Authentication auth)
+    public ResponseEntity<Borrower> updateBorrower(@PathVariable Long borrowerId, @RequestBody Borrower borrower, Authentication auth)
             throws Exception {
-        return borrowerService.update(borrowerId, borrower, auth.getName());
+        return new ResponseEntity<>(borrowerService.update(borrowerId, borrower, auth.getName()), HttpStatus.OK);
     }
 
     @DeleteMapping("/api/borrowers/{borrowerId}")
@@ -50,18 +50,18 @@ public class BorrowerController {
     }
 
     @GetMapping("/api/borrowers/total")
-    public Double getTotalAmount(Authentication auth) throws Exception {
-        return borrowerService.getTotalAmount(auth.getName());
+    public ResponseEntity<Double> getTotalAmount(Authentication auth) throws Exception {
+        return new ResponseEntity<>(borrowerService.getTotalAmount(auth.getName()), HttpStatus.OK);
     }
 
     @GetMapping("/api/borrowers/{borrowerId}/loanreturns")
-    public List<LoanReturns> getLoanReturnByBorrower(@PathVariable Long borrowerId, Authentication auth){
-        return borrowerService.getReturnDetails(borrowerId, auth.getName());
+    public ResponseEntity<List<LoanReturns>> getLoanReturnByBorrower(@PathVariable Long borrowerId, Authentication auth){
+        return new ResponseEntity<>(borrowerService.getReturnDetails(borrowerId, auth.getName()), HttpStatus.OK);
     }
 
     @PostMapping("/api/borrowers/{borrowerId}/loanreturns")
-    public LoanReturns getLoanReturnByBorrower(@PathVariable Long borrowerId, @RequestBody LoanReturns loanReturns, Authentication auth){
-        return borrowerService.addAReturn(borrowerId, loanReturns, auth.getName());
+    public ResponseEntity<LoanReturns> getLoanReturnByBorrower(@PathVariable Long borrowerId, @RequestBody LoanReturns loanReturns, Authentication auth){
+        return new ResponseEntity<>(borrowerService.addAReturn(borrowerId, loanReturns, auth.getName()), HttpStatus.OK);
     }
 
     @DeleteMapping("/api/borrowers/{borrowerId}/loanreturns/{loanReturnId}")

@@ -15,9 +15,9 @@ import com.finapps.management.finans.utils.Constants;
 @Service
 public class TransactionService {
 	@Autowired
-	TransactionRepository transactionRepo;
+	private TransactionRepository transactionRepo;
 	@Autowired
-    UserRepository userRepo;
+	private UserRepository userRepo;
 	
 	public List<Transaction> getTransactions(String username){
 		Users user = userRepo.findByUsername(username);

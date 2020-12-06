@@ -17,9 +17,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoanService {
     @Autowired
-    LoanRepository loanRepo;
+    private LoanRepository loanRepo;
     @Autowired
-    UserRepository userRepo;
+    private UserRepository userRepo;
 
     public List<Loan> getLoans(String username) {
         Users user = userRepo.findByUsername(username);
