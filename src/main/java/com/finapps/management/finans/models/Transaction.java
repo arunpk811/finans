@@ -34,6 +34,8 @@ public class Transaction {
 	private Float amount;
 	private String type;
 	private Date transactionDate;
+	@ManyToOne
+	private Account account;
 	@Getter(AccessLevel.NONE)
 	@ManyToOne
 	private Users user;

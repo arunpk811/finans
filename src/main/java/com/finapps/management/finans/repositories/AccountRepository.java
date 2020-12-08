@@ -11,4 +11,6 @@ import java.util.List;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
     public List<Account> findAllByUser(Users user);
+
+    public List<Account> findAllByUserAndIsActive(Users user, Integer active);
 }

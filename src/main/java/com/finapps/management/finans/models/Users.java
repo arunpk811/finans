@@ -28,7 +28,7 @@ public class Users {
 	@NotNull
 	private String password;
 	@NotNull
-	private int isActive;
+	private Integer isActive;
 	@ManyToOne
 	@Getter(AccessLevel.NONE)
 	private Role role;

@@ -1,9 +1,6 @@
 package com.finapps.management.finans.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import lombok.*;
 
@@ -21,7 +18,7 @@ public class Account {
 	private Banks bank;
 	private Double balance;
 	private AccountType type;
-	private Boolean isActive;
+	private Integer isActive;
 
 	@ManyToOne
 	@Getter(AccessLevel.NONE)

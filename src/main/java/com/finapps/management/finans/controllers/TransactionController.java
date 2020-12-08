@@ -2,6 +2,7 @@ package com.finapps.management.finans.controllers;
 
 import java.util.List;
 
+import com.finapps.management.finans.models.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,9 +43,7 @@ public class TransactionController {
 
 	@DeleteMapping("/api/transactions/{id}")
 	public ResponseEntity<StringResponse> delete(@PathVariable Long id, Authentication auth) {
-		return new ResponseEntity<>(new StringResponse(transactionService.delete(id)), HttpStatus.OK);
+		return new ResponseEntity<>(new StringResponse(transactionService.delete(id, auth.getName())), HttpStatus.OK);
 	}
 
-//	@GetMapping("/api/transactions/{bank}")
-//	public ResponseEntity
 }

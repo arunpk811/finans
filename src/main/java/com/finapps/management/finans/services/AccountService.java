@@ -29,6 +29,11 @@ public class AccountService {
 		Users user = userRepo.findByUsername(username);
 		return accountRepo.findAllByUser(user);
 	}
+
+	public List<Account> getActiveAccounts(String username){
+		Users user = userRepo.findByUsername(username);
+		return accountRepo.findAllByUserAndIsActive(user, 1);
+	}
 	
 	public Account create(AccountDetailsRequest request, String username) {
 		Users user = userRepo.findByUsername(username);
@@ -37,7 +42,7 @@ public class AccountService {
 				.bank(Banks.valueOf(request.getBank()))
 				.balance(request.getBalance())
 				.type(AccountType.valueOf(request.getType()))
-				.isActive(request.getIsActive())
+				.isActive(request.getIsActive()?1:0)
 				.user(user)
 				.build();
 		return accountRepo.saveAndFlush(account);
@@ -51,7 +56,7 @@ public class AccountService {
 				.bank(Banks.valueOf(request.getBank()))
 				.balance(request.getBalance())
 				.type(AccountType.valueOf(request.getType()))
-				.isActive(request.getIsActive())
+				.isActive(request.getIsActive()?1:0)
 				.user(user)
 				.build();
 		return accountRepo.saveAndFlush(account);

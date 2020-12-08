@@ -26,6 +26,11 @@ public class AccountController {
         return new ResponseEntity<>(accountService.getAccounts(auth.getName()), HttpStatus.OK);
     }
 
+    @GetMapping("/api/accounts/active")
+    public ResponseEntity<List<Account>> getActiveAccounts(Authentication auth) throws Exception {
+        return new ResponseEntity<>(accountService.getActiveAccounts(auth.getName()), HttpStatus.OK);
+    }
+
     @PostMapping("/api/accounts")
     public ResponseEntity<Account> createAccount(@RequestBody AccountDetailsRequest request, Authentication auth) throws Exception {
         return new ResponseEntity<>(accountService.create(request, auth.getName()), HttpStatus.OK);
