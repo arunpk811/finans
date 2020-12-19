@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/finans
+    username: finansuser
+    password: User@123
+jwt:
+  secret: admin
+logging:
+  level:
+    root:
+    com:
+      finapps: INFO
